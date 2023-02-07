@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get("/", TaskController.findAll);
 router.get("/:id", TaskController.findOne);
-router.post("/", TaskController.create);
+router.post("/create", TaskController.create);
 router.put("/:id", TaskController.updated);
 router.delete("/:id", TaskController.delete);
 

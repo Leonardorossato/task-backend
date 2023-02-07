@@ -1,11 +1,9 @@
 const Task = require("../schemas/task.schema");
 
 class TaskController {
-  static create = async (req, res, next) => {
+  static create = async (req, res) => {
     try {
-      const task = req.body;
-      await Task.create();
-      await task.save();
+      const task = await Task.create(req.body);
       return res.status(201).json(task);
     } catch (error) {
       return res.status(404).json({ error: error.message });
