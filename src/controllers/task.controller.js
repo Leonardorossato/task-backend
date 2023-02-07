@@ -1,10 +1,18 @@
 const Task = require("../schemas/task.schema");
+const validationTasks = require("../validation/task.validation");
 
 class TaskController {
   static create = async (req, res) => {
+    const task = new Task({
+      name: req.body.name,
+      completed: req.body.completed,
+    });
     try {
-      const task = await Task.create(req.body);
-      return res.status(201).json(task);
+      const { error } = validationTasks(req.body);
+      if (error) res.status(400).json({ message: error.details[0].message });
+
+      const newTask = await Task.create(task);
+      return res.status(201).json({ newTask });
     } catch (error) {
       return res.status(404).json({ error: error.message });
     }
