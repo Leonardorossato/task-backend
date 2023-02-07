@@ -5,6 +5,7 @@ class TaskController {
     try {
       const task = req.body;
       await Task.create();
+      await task.save();
       return res.status(201).json(task);
     } catch (error) {
       return res.status(404).json({ error: error.message });
