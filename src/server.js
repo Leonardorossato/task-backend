@@ -5,6 +5,8 @@ const PORT = process.env.PORT;
 const mongoConnection = require("./config/mongo.config");
 const taksRouter = require("./routes/task.route");
 
+app.use(express.json());
+
 app.mongoConnection = mongoConnection;
 
 app.use("/api/tasks", taksRouter);
